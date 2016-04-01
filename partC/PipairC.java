@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -27,8 +28,9 @@ public class PipairC {
 		int expansion=1;
 		
 		switch(args.length){
+			//case 0: break;
 			case 1: break;
-			case 3: 
+			case 3:
 				support = Integer.parseInt(args[1]);
 				confidence = Float.parseFloat(args[2])/100;
 				break;
@@ -54,6 +56,8 @@ public class PipairC {
 		HashMap<String,HashSet<String>>  caller_to_callee=new HashMap<String,HashSet<String>>(); //save all caller_callee relationship
 		String caller;
 		
+		//File file = new File("src/q1/graphoutput.txt");
+		//Scanner scanner = new Scanner(file);
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -198,9 +202,9 @@ public class PipairC {
 				for(Map.Entry<HashSet<String>, Integer> entry_pair : pipair_pair.entrySet()){
 					int value_pair = entry_pair.getValue();
 					HashSet<String> key_pair = entry_pair.getKey();
-					double confi = (float)value_pair / value_single;
+					float confi = (float)value_pair / value_single;
 					
-					if(value_pair >= support && key_pair.contains(key_single) && confi >=confidence && confi < 1){		
+					if(value_pair >= support && key_pair.contains(key_single) && confi >=confidence && confi <= 1){		
 						HashSet<String> single = null;
 						HashSet<String> pair = null;
 						single = pipair.get(key_s);  // not key_single, it is a String not HashSet
@@ -208,19 +212,22 @@ public class PipairC {
 						for(String s:single){
 							if(!pair.contains(s)){
 								/* printing bug */
-								
 								ArrayList<String> bug_pair_sort = new ArrayList<String>();
 								for(String str:key_pair){
 									bug_pair_sort.add(str);
 								}
 								Collections.sort(bug_pair_sort);
+						
+								String bug_pair = bug_pair_sort.toString();
+								bug_pair = bug_pair.replaceAll("\\[", "(");
+								bug_pair = bug_pair.replaceAll("\\]", ")");
 								
 								NumberFormat fmt = NumberFormat.getPercentInstance();
 								fmt.setMinimumFractionDigits(2);
 								fmt.setMaximumFractionDigits(2);
 								
 								System.out.println("bug: " + key_single + " in "+ s 
-									+ ", pair: " + bug_pair_sort
+									+ ", pair: " + bug_pair
 									+ ", support: " + value_pair
 									+ ", confidence: " + fmt.format(confi)
 									);
