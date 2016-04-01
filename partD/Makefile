@@ -1,15 +1,21 @@
 #all: build
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/master
 #build:
 #	chmod +x clean.sh
 #	chmod +x timeout.sh
 #	chmod +x pipair 
 #	javac PipairD.java
+<<<<<<< HEAD
 =======
 build:
 	chmod +x pipair 
 	javac PipairD.java
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
 #clean: 
