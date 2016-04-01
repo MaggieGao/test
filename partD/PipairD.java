@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Map;
@@ -26,7 +27,17 @@ public class PipairD {
 		int latent_spe=1;
 		
 		switch(args.length){
+			//case 0: break;
 			case 1: break;
+			case 3:
+				support = Integer.parseInt(args[1]);
+				confidence = Float.parseFloat(args[2])/100;
+				break;
+			case 4:
+				support = Integer.parseInt(args[1]);
+				confidence = Float.parseFloat(args[2])/100;
+				expansion=Integer.parseInt(args[3]);
+				break;
 			case 5: 
 				support = Integer.parseInt(args[1]);
 				confidence = Float.parseFloat(args[2])/100;
@@ -53,7 +64,8 @@ public class PipairD {
 		HashMap<String,ArrayList<String>>  caller_to_callee=new HashMap<String,ArrayList<String>>(); //save all caller_callee relationship
 		String caller;
 		
-		
+		//File file = new File("src/q1/graphoutput.txt");
+		//Scanner scanner = new Scanner(file);
 		Scanner scanner = new Scanner(System.in);
 		
 		String pattern_caller = "Call.*'(.*)'.*";
@@ -205,8 +217,12 @@ public class PipairD {
 								fmt.setMinimumFractionDigits(2);
 								fmt.setMaximumFractionDigits(2);
 								
+								String bug_pair=key_pair.toString();
+								bug_pair = bug_pair.replaceAll("\\[", "(");
+								bug_pair = bug_pair.replaceAll("\\]", ")");
+								
 								System.out.println("bug: " + key_single + " in "+ s 
-									+ ", pair: " + key_pair
+									+ ", pair: " + bug_pair
 									+ ", support: " + value_pair
 									+ ", confidence: " + fmt.format(confi)
 									);
@@ -274,7 +290,7 @@ public class PipairD {
 						}
 					}
 					
-					if(value_pair >= support && key_pair.contains(key_single) && confi >=confidence ){		
+					if(value_pair >= support && key_pair.contains(key_single) && confi >=confidence && confi <= 1){		
 						HashSet<String> single = null;
 						HashSet<String> pair = null;
 						single = pipair.get(key_s);  // not key_single, it is a String not HashSet
@@ -286,8 +302,12 @@ public class PipairD {
 								fmt.setMinimumFractionDigits(2);
 								fmt.setMaximumFractionDigits(2);
 								
+								String bug_pair=key_pair.toString();
+								bug_pair = bug_pair.replaceAll("\\[", "(");
+								bug_pair = bug_pair.replaceAll("\\]", ")");
+								
 								System.out.println("bug: " + key_single + " in "+ s 
-									+ ", pair: " + key_pair
+									+ ", pair: " + bug_pair
 									+ ", support: " + value_pair
 									+ ", confidence: " + fmt.format(confi)
 									);
