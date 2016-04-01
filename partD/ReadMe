@@ -1,0 +1,20 @@
+pipair partD,version 1.0.0
+
+pipair is a program that find bugs using statistic analysis
+
+How to use it:
+It works just as the pipair in partA and partC
+The only difference is that it has 4 parameters.
+args[1]:support, determine the threshold of at least how many time a pair of function shows up to make it value. support >= 0
+args[2]:confidence, determine the threshold of the percentage of confidence. 0 < confidence < 100
+args[3]:the expansion level of inter-Inter-Procedural Analysis, 0 means no Inter-Procedural Analysis
+args[4]:control whether or not latent specification is used in finding bugs. 0 means not use, other integer means use.
+
+
+Files:
+-------------------------------------
+PipairD.java
+Makefile
+Makefile.commom
+
+
