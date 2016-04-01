@@ -1,0 +1,2 @@
+bug: D in scope2, pair: (B, D), support: 4, confidence: 80.00%
+bug: B in scope3, pair: (B, D), support: 4, confidence: 80.00%
