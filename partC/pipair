@@ -1,0 +1,6 @@
+#!/bin/bash
+#unset JAVA_TOOL_OPTIONS
+#opt -print-callgraph $1  2>graphoutput.txt 1>/dev/null
+opt -print-callgraph $1 2>&1 >/dev/null  | java -cp ../ -Xms128m -Xmx128m PipairC $@ 2>/dev/null
+#java -cp ../ -Xms128m  PiPair graphoutput.txt $2 $3
+
